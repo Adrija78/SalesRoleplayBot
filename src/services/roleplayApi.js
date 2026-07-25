@@ -1,4 +1,12 @@
-const API_BASE = 'http://localhost:5000/api/chat';
+// Local development uses Express on port 5000. In production, set
+// VITE_API_BASE_URL to the deployed backend URL ending in /api/chat.
+export const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api/chat';
+
+export async function getBackendStatus() {
+  const backendOrigin = API_BASE.replace(/\/api\/chat\/?$/, '');
+  const response = await fetch(`${backendOrigin}/`);
+  return response.json();
+}
 
 /** Sends a salesperson message to the configured backend AI provider. */
 export async function sendChatMessage(message, persona, history = []) {

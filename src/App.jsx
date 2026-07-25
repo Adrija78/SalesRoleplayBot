@@ -5,7 +5,7 @@ import Transcript from './components/Transcript.jsx';
 import Conversation from './components/Conversation.jsx';
 import ScoreCard from './components/ScoreCard.jsx';
 import { PERSONA_PRESETS } from './data/personas.js';
-import { sendChatMessage, getPitchEvaluation } from './services/roleplayApi.js';
+import { sendChatMessage, getPitchEvaluation, getBackendStatus } from './services/roleplayApi.js';
 import './styles/app.css';
 
 /**
@@ -24,8 +24,7 @@ function App() {
   useEffect(() => {
     const checkServer = async () => {
       try {
-        const response = await fetch('http://localhost:5000/');
-        const data = await response.json();
+        const data = await getBackendStatus();
         if (data.success) {
           setServerStatus('online');
         } else {

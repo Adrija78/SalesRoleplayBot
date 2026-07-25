@@ -106,6 +106,30 @@ LLM_MODEL=provider_model_name
 
 Never commit `backend/.env`. It is ignored by Git.
 
+## Deployment
+
+Deploy the backend first, then deploy the frontend.
+
+### 1. Backend on Render
+
+1. In Render, select **New → Blueprint** and connect this GitHub repository. Render will use `render.yaml` and create the Express service from the `backend` directory.
+2. Add the secret environment variable `GROQ_API_KEY` in the Render service settings. Do not put it in GitHub.
+3. Deploy and copy the service URL, for example `https://sales-roleplay-api.onrender.com`.
+
+### 2. Frontend on Vercel
+
+1. Import this GitHub repository in Vercel.
+2. Keep the project root as the repository root; Vercel detects Vite automatically.
+3. Add this environment variable before deploying:
+
+```env
+VITE_API_BASE_URL=https://your-render-service.onrender.com/api/chat
+```
+
+4. Deploy. Vite exposes only variables prefixed with `VITE_`, so the frontend receives the public backend URL but never the Groq key.
+
+After deployment, open the Vercel URL and allow microphone permission. The frontend sends requests to Render, and only the Render backend can call Groq.
+
 ## Verification
 
 ```powershell
