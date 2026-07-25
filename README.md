@@ -1,114 +1,567 @@
-# Sales Crucible — AI Sales Roleplay Voice Bot
+# 🎯 Sales Crucible — AI Sales Roleplay Voice Bot
 
-Sales Crucible is a voice-enabled sales-practice application. A sales representative speaks or types a pitch, while an AI roleplays as a realistic customer: it asks questions, challenges vague claims, and raises objections. When the session ends, the app can analyze the transcript and return a coaching scorecard.
+Sales Crucible is a full-stack AI-powered sales training application that simulates realistic customer conversations. Users practice their sales pitch through text or voice while an AI plays the role of a prospective customer, asking questions, raising objections, and evaluating the conversation.
 
-## What it demonstrates
+The application helps improve sales communication, objection handling, discovery questioning, and closing techniques by providing an interactive roleplay experience followed by AI-generated coaching feedback.
 
-- Live spoken, turn-based roleplay using the browser microphone and text-to-speech.
-- Configurable buyer simulations, including industry, company size, difficulty, temperament, urgency, objection style, and custom context.
-- Four starter personas plus a custom-buyer editor. Personas are fictional, privacy-safe training profiles—not real customers.
-- A transcript and AI sales-coaching scorecard for objection handling, value proposition, rapport, and closing.
+---
 
-## Architecture
+## 📖 Overview
 
-`Microphone / text input → React UI → Express API → Groq chat completion → customer reply → browser speech synthesis`
+Sales Crucible provides an immersive environment for practicing sales conversations without requiring a real customer.
 
-The frontend uses React and Vite. The backend uses Node.js and Express. Persona settings are sent with each turn, transformed into a system prompt on the backend, and then supplied with conversation history to the model. This keeps customer behavior configuration-driven rather than creating separate hardcoded bots.
+During each session:
 
-## AI provider decision
+- You play the role of the Sales Representative.
+- The AI acts as the Customer or Prospect.
+- The AI responds naturally based on the selected buyer persona.
+- After the conversation, the application generates a coaching report highlighting strengths and areas for improvement.
 
-The first version used Google Gemini. During development its free-tier quota was exhausted, so the backend was switched to Groq without changing the frontend. Groq offers an OpenAI-compatible chat-completions endpoint; the project uses the `openai/gpt-oss-120b` model by default. The provider adapter also supports any OpenAI-compatible provider through environment variables.
+The project demonstrates modern full-stack development combined with Large Language Models (LLMs), browser voice APIs, and configurable AI personas.
 
-## Setup
+---
 
-Prerequisite: Node.js 18 or newer.
+# ✨ Features
 
-1. Create `backend/.env` from `backend/.env.example`.
-2. Add your Groq API key:
+- 🤖 AI-powered customer simulation
+- 🎤 Voice-enabled conversations
+- 💬 Text chat support
+- 🔊 AI speech responses
+- 📋 Multiple buyer personas
+- 🛠 Custom buyer configuration
+- 📈 AI coaching scorecard
+- 📝 Complete conversation transcript
+- 🎯 Objection handling practice
+- 📱 Responsive React interface
+- ⚡ Real-time AI responses
+- 🔄 Configurable AI provider
+
+---
+
+# 🚀 What It Demonstrates
+
+- Live voice-based sales roleplay
+- AI-generated customer objections
+- Discovery question practice
+- Configurable customer personalities
+- Sales coaching using LLMs
+- Browser Speech Recognition
+- Browser Speech Synthesis
+- Full-stack React + Express architecture
+
+---
+
+# 🛠 Technologies Used
+
+## Frontend
+
+- React
+- Vite
+- JavaScript
+- HTML5
+- CSS3
+
+## Backend
+
+- Node.js
+- Express.js
+
+## AI
+
+- Groq API
+- OpenAI-Compatible Chat Completion API
+- GPT OSS 120B (default model)
+
+## Browser APIs
+
+- Web Speech API
+- SpeechRecognition
+- webkitSpeechRecognition
+- SpeechSynthesis
+
+## Development Tools
+
+- Visual Studio Code
+- Git
+- GitHub
+- OpenAI Codex
+
+---
+
+# 🏗 Architecture
+
+```
+Microphone / Text Input
+          │
+          ▼
+     React Frontend
+          │
+          ▼
+     Express Backend
+          │
+          ▼
+      Groq Chat API
+          │
+          ▼
+    AI Customer Reply
+          │
+          ▼
+ Browser Speech Synthesis
+```
+
+The frontend is built with **React** and **Vite**, while the backend uses **Node.js** and **Express**.
+
+Each conversation includes:
+
+- Conversation history
+- Selected buyer persona
+- Buyer settings
+- System prompt
+
+The backend dynamically generates prompts based on buyer configuration rather than using hardcoded customer bots.
+
+---
+
+# 🧠 Development Journey
+
+The project was originally planned to be developed using **Claude Code** because of its agent-based coding workflow.
+
+However, Claude Code requires a paid subscription, which was not available during development.
+
+Instead, the project was successfully built using **OpenAI Codex**, which assisted throughout development by helping with:
+
+- Code generation
+- Component implementation
+- Debugging
+- Refactoring
+- Backend API integration
+- Error fixing
+- Development workflow
+
+For AI responses, the backend initially used **Google Gemini**.
+
+During testing, the free-tier API quota was exhausted, so the backend was migrated to **Groq**. Since Groq provides an OpenAI-compatible Chat Completion API, the migration only required backend configuration changes while keeping the frontend unchanged.
+
+This project demonstrates how AI providers can be swapped easily when applications are designed around a provider-independent API architecture.
+
+---
+
+# 🤖 AI Provider
+
+Current AI Provider:
+
+- Groq
+
+Default Model:
+
+- openai/gpt-oss-120b
+
+Development History
+
+- Planned development with Claude Code
+- Built using OpenAI Codex
+- Initial AI backend: Google Gemini
+- Migrated to Groq after Gemini free-tier quota exhaustion
+
+The backend supports any OpenAI-compatible provider through environment variables.
+
+---
+
+# 📂 Project Structure
+
+```
+Sales-Crucible/
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── hooks/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   ├── public/
+│   ├── package.json
+│   └── vite.config.js
+│
+├── backend/
+│   ├── routes/
+│   ├── controllers/
+│   ├── utils/
+│   ├── server.js
+│   ├── package.json
+│   ├── .env.example
+│   └── .env
+│
+├── README.md
+└── .gitignore
+```
+
+---
+
+# 🎤 Voice Features
+
+## Speech Recognition
+
+The application uses the browser's built-in **Web Speech API**.
+
+```
+SpeechRecognition
+webkitSpeechRecognition
+```
+
+Speech is automatically converted into text before being sent to the backend.
+
+### Benefits
+
+- No paid speech service
+- No WebRTC
+- Browser-native
+- Fast speech recognition
+
+---
+
+## Speech Synthesis
+
+The AI customer's responses are spoken aloud using
+
+```
+window.speechSynthesis
+```
+
+Benefits
+
+- Browser-supported
+- No external Text-to-Speech API
+- Natural AI responses
+
+---
+
+# 💬 How the Roleplay Works
+
+1. Select a buyer persona.
+2. Start speaking or type your pitch.
+3. The backend sends your message and buyer settings to the AI.
+4. The AI generates realistic customer responses.
+5. Continue the conversation naturally.
+6. Finish the session.
+7. Click **Analyze Pitch & Grade**.
+8. Receive an AI-generated coaching report.
+
+---
+
+# 👥 Buyer Personas
+
+The application includes multiple configurable buyer personas.
+
+## Arthur Pendelton
+
+**Role:** CFO
+
+Difficulty: Hard
+
+Focus Areas
+
+- Budget
+- ROI
+- Financial Risk
+- Software Costs
+
+---
+
+## David Chen
+
+**Role:** CTO
+
+Difficulty: Hard
+
+Focus Areas
+
+- Security
+- APIs
+- Infrastructure
+- Integrations
+
+---
+
+## Sarah Jenkins
+
+**Role:** VP Marketing
+
+Difficulty: Easy
+
+Focus Areas
+
+- Marketing Campaigns
+- Team Productivity
+- Growth
+- ROI
+
+---
+
+## Linda Mercer
+
+**Role:** Procurement Director
+
+Difficulty: Medium
+
+Focus Areas
+
+- Vendor Selection
+- Contracts
+- Procurement Process
+- Risk Reduction
+
+---
+
+# 📊 Coaching Report
+
+After every conversation the AI evaluates:
+
+- Discovery Questions
+- Rapport Building
+- Value Proposition
+- Objection Handling
+- Product Knowledge
+- Closing Strategy
+- Overall Communication
+
+The report includes actionable suggestions for improvement.
+
+---
+
+# ⚙ Installation
+
+## Prerequisites
+
+Node.js 18+
+
+---
+
+## Clone Repository
+
+```bash
+git clone https://github.com/yourusername/Sales-Crucible.git
+```
+
+---
+
+## Install Backend
+
+```bash
+cd backend
+
+npm install
+```
+
+Create `.env`
 
 ```env
 GROQ_API_KEY=your_groq_api_key
+
 PORT=5000
 ```
 
-3. Run the backend in one terminal:
+Run backend
 
-```powershell
-cd backend
-npm.cmd install
-npm.cmd run dev
+```bash
+npm run dev
 ```
 
-4. Run the frontend in a second terminal:
+---
 
-```powershell
-cd ..
-npm.cmd install
-npm.cmd run dev
+## Install Frontend
+
+```bash
+cd ../frontend
+
+npm install
+
+npm run dev
 ```
 
-Open the Vite URL printed in the terminal, normally `http://localhost:5173`.
+Open
 
-## Using the roleplay
+```
+http://localhost:5173
+```
 
-1. Select a buyer preset or configure a custom buyer.
-2. State your name, company, and the value you offer. Use the microphone or type your message.
-3. Ask discovery questions, respond to the buyer’s objections, and request a clear next step such as a demo.
-4. Select **Analyze Pitch & Grade** for coaching feedback.
+---
 
-You are always the sales representative. The AI is always the customer/prospect.
+# 🌐 Environment Variables
 
-## Buyer playbooks
+```
+GROQ_API_KEY=your_api_key
 
-Use these discovery questions when practising. Ask only one at a time, then follow the customer’s answer.
+PORT=5000
 
-### Arthur Pendelton — CFO, hard difficulty
+LLM_API_KEY=
 
-- How do you currently track software spend and unused licenses?
-- Which renewals or cost areas are under the most scrutiny this quarter?
-- What financial outcome would make a new solution worth evaluating?
-- What evidence would you need to believe savings can be achieved within three months?
-- If the ROI is proven, who else is involved in approving a pilot?
+LLM_BASE_URL=
 
-### David Chen — CTO, hard difficulty
+LLM_MODEL=openai/gpt-oss-120b
+```
 
-- Which systems would a new tool need to integrate with on day one?
-- What security, SSO, data-residency, or compliance requirements are non-negotiable?
-- How does your team evaluate vendor reliability and API performance today?
-- What would make implementation too disruptive for your engineering team?
-- Who needs to validate the technical solution before a pilot can begin?
+---
 
-### Sarah Jenkins — VP Marketing, easy difficulty
+# 🔄 Switching AI Providers
 
-- What campaign or growth goal is most urgent for your team right now?
-- Where does your team lose the most time in the current workflow?
-- How quickly would your team need to see value after onboarding?
-- What would make adoption easy for your creative and marketing teams?
-- Would a short demo with the campaign team be a useful next step?
+The backend supports any OpenAI-compatible provider.
 
-### Linda Mercer — Procurement Director, medium difficulty
+Example
 
-- What is your normal process for evaluating and onboarding a new vendor?
-- What contract terms or risks usually slow down a purchase?
-- Would a time-boxed pilot reduce the risk enough to evaluate us?
-- Which proof points or customer references would procurement require?
-- Who should be included in a first evaluation meeting?
-
-## Switching providers
-
-Set these values in `backend/.env` to use OpenAI, OpenRouter, or another compatible API:
-
-```env
+```
 LLM_API_KEY=your_provider_key
+
 LLM_BASE_URL=https://provider.example/v1
-LLM_MODEL=provider_model_name
+
+LLM_MODEL=provider_model
 ```
 
-Never commit `backend/.env`. It is ignored by Git.
+Supported providers include
 
-## Verification
+- Groq
+- OpenAI
+- OpenRouter
+- Local OpenAI-compatible servers
 
-```powershell
-npm.cmd run lint
-npm.cmd run build
+---
+
+# 📈 Learning Outcomes
+
+This project helped strengthen skills in
+
+- React
+- Node.js
+- Express.js
+- REST APIs
+- Prompt Engineering
+- AI Integration
+- Browser Voice APIs
+- Speech Recognition
+- Speech Synthesis
+- Full-stack Application Development
+- API Provider Migration
+- State Management
+- Environment Configuration
+
+---
+
+# ⚡ Challenges Faced
+
+Some of the key challenges during development included:
+
+- Managing conversation history
+- Designing configurable AI personas
+- Handling asynchronous API requests
+- Integrating browser speech APIs
+- Migrating from Gemini to Groq
+- Maintaining provider-independent backend architecture
+- Managing AI prompts effectively
+
+---
+
+# 🧪 Verification
+
+Run lint
+
+```bash
+npm run lint
 ```
+
+Build project
+
+```bash
+npm run build
+```
+
+---
+
+# 📷 Screenshots
+
+```
+screenshots/
+
+home.png
+
+chat.png
+
+voice-mode.png
+
+analysis.png
+```
+
+(Add screenshots after uploading them.)
+
+---
+
+# 🔮 Future Improvements
+
+- Authentication
+- Conversation history
+- Dashboard
+- CRM integration
+- Analytics
+- Multiple languages
+- Voice customization
+- Additional buyer personas
+- Team leaderboard
+- Export coaching reports
+- PDF report generation
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Commit your changes.
+4. Push the branch.
+5. Open a Pull Request.
+
+---
+
+# 🙏 Acknowledgements
+
+This project was developed with assistance from **OpenAI Codex** for implementation, debugging, and code refinement.
+
+The project was originally planned to be built using **Claude Code**, but due to its paid subscription requirement, development was completed using OpenAI Codex.
+
+The AI backend initially used **Google Gemini** before being migrated to **Groq** after the free-tier quota limit was reached.
+
+---
+
+# 👨‍💻 Author
+
+**Adrija Karmakar**
+
+Final Year B.Tech Computer Science Engineering Student
+
+Full Stack Developer
+
+### Skills
+
+- React
+- Node.js
+- Express.js
+- JavaScript
+- MongoDB
+- REST APIs
+- Git
+- GitHub
+
+**GitHub:** https://github.com/Adrija78
+
+**Portfolio:** https://addyy-portfolio.vercel.app/
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+# ⭐ If you found this project useful, consider giving it a Star!
