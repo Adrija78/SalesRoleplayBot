@@ -1,27 +1,59 @@
-# 🎯 Sales Crucible – AI Sales Roleplay Voice Bot
+# 🎯 Sales Crucible — AI Sales Roleplay Voice Bot
 
-Sales Crucible is a full-stack AI-powered sales training application that helps users practice real-world sales conversations through text and voice interactions. The application simulates realistic customer personas that ask questions, challenge vague claims, raise objections, and provide a lifelike sales experience. After each roleplay session, the AI analyzes the conversation and generates a coaching scorecard with actionable feedback.
+Sales Crucible is a full-stack AI-powered sales training application that simulates realistic customer conversations. Users practice their sales pitch through text or voice while an AI plays the role of a prospective customer, asking questions, raising objections, and evaluating the conversation.
+
+The application helps improve sales communication, objection handling, discovery questioning, and closing techniques by providing an interactive roleplay experience followed by AI-generated coaching feedback.
 
 ---
 
-## 🚀 Features
+## 📖 Overview
 
-- 🤖 AI-powered customer roleplay
+Sales Crucible provides an immersive environment for practicing sales conversations without requiring a real customer.
+
+During each session:
+
+- You play the role of the Sales Representative.
+- The AI acts as the Customer or Prospect.
+- The AI responds naturally based on the selected buyer persona.
+- After the conversation, the application generates a coaching report highlighting strengths and areas for improvement.
+
+The project demonstrates modern full-stack development combined with Large Language Models (LLMs), browser voice APIs, and configurable AI personas.
+
+---
+
+# ✨ Features
+
+- 🤖 AI-powered customer simulation
 - 🎤 Voice-enabled conversations
 - 💬 Text chat support
-- 🔊 AI voice responses
-- 👥 Multiple buyer personas
-- ⚙️ Custom buyer configuration
-- 📊 AI-generated coaching scorecard
+- 🔊 AI speech responses
+- 📋 Multiple buyer personas
+- 🛠 Custom buyer configuration
+- 📈 AI coaching scorecard
 - 📝 Complete conversation transcript
 - 🎯 Objection handling practice
 - 📱 Responsive React interface
+- ⚡ Real-time AI responses
+- 🔄 Configurable AI provider
 
 ---
 
-## 🛠️ Tech Stack
+# 🚀 What It Demonstrates
 
-### Frontend
+- Live voice-based sales roleplay
+- AI-generated customer objections
+- Discovery question practice
+- Configurable customer personalities
+- Sales coaching using LLMs
+- Browser Speech Recognition
+- Browser Speech Synthesis
+- Full-stack React + Express architecture
+
+---
+
+# 🛠 Technologies Used
+
+## Frontend
 
 - React
 - Vite
@@ -29,24 +61,25 @@ Sales Crucible is a full-stack AI-powered sales training application that helps 
 - HTML5
 - CSS3
 
-### Backend
+## Backend
 
 - Node.js
 - Express.js
 
-### AI
+## AI
 
 - Groq API
 - OpenAI-Compatible Chat Completion API
-- GPT OSS 120B
+- GPT OSS 120B (default model)
 
-### Browser APIs
+## Browser APIs
 
-- SpeechRecognition
-- SpeechSynthesis
 - Web Speech API
+- SpeechRecognition
+- webkitSpeechRecognition
+- SpeechSynthesis
 
-### Development Tools
+## Development Tools
 
 - Visual Studio Code
 - Git
@@ -55,131 +88,109 @@ Sales Crucible is a full-stack AI-powered sales training application that helps 
 
 ---
 
-## 🏗️ Architecture
+# 🏗 Architecture
 
 ```
 Microphone / Text Input
-        │
-        ▼
-   React Frontend
-        │
-        ▼
-   Express Backend
-        │
-        ▼
-     Groq API
-        │
-        ▼
- AI Customer Response
-        │
-        ▼
-Browser Speech Synthesis
+          │
+          ▼
+     React Frontend
+          │
+          ▼
+     Express Backend
+          │
+          ▼
+      Groq Chat API
+          │
+          ▼
+    AI Customer Reply
+          │
+          ▼
+ Browser Speech Synthesis
 ```
 
----
+The frontend is built with **React** and **Vite**, while the backend uses **Node.js** and **Express**.
 
-## 🧠 Development Journey
+Each conversation includes:
 
-This project was originally planned to be developed using **Claude Code** because of its agent-based coding workflow. However, Claude Code requires a paid subscription, which was unavailable during development.
+- Conversation history
+- Selected buyer persona
+- Buyer settings
+- System prompt
 
-Instead, the project was built with assistance from **OpenAI Codex**, which was used for implementation, debugging, refactoring, and backend integration.
-
-The backend initially used **Google Gemini**, but after reaching the free-tier API quota, it was migrated to **Groq**. Since Groq provides an OpenAI-compatible Chat Completion API, the migration only required backend configuration changes while keeping the frontend unchanged.
-
----
-
-## ⚡ How It Works
-
-1. Select a buyer persona.
-2. Start speaking or type your sales pitch.
-3. Your message is sent to the backend.
-4. The backend sends the conversation history and persona to the AI model.
-5. The AI responds as a realistic customer.
-6. The response is displayed and spoken aloud.
-7. End the session and analyze your performance.
+The backend dynamically generates prompts based on buyer configuration rather than using hardcoded customer bots.
 
 ---
 
-## 👥 Buyer Personas
+# 🧠 Development Journey
 
-### Arthur Pendelton
-**Role:** CFO  
-**Difficulty:** Hard
+The project was originally planned to be developed using **Claude Code** because of its agent-based coding workflow.
 
-Focuses on:
-- ROI
-- Budget
-- Cost Reduction
-- Financial Risk
+However, Claude Code requires a paid subscription, which was not available during development.
 
----
+Instead, the project was successfully built using **OpenAI Codex**, which assisted throughout development by helping with:
 
-### David Chen
-**Role:** CTO  
-**Difficulty:** Hard
+- Code generation
+- Component implementation
+- Debugging
+- Refactoring
+- Backend API integration
+- Error fixing
+- Development workflow
 
-Focuses on:
-- Security
-- APIs
-- Integrations
-- Scalability
+For AI responses, the backend initially used **Google Gemini**.
+
+During testing, the free-tier API quota was exhausted, so the backend was migrated to **Groq**. Since Groq provides an OpenAI-compatible Chat Completion API, the migration only required backend configuration changes while keeping the frontend unchanged.
+
+This project demonstrates how AI providers can be swapped easily when applications are designed around a provider-independent API architecture.
 
 ---
 
-### Sarah Jenkins
-**Role:** VP Marketing  
-**Difficulty:** Easy
+# 🤖 AI Provider
 
-Focuses on:
-- Marketing Campaigns
-- Team Productivity
-- Growth
+Current AI Provider:
 
----
+- Groq
 
-### Linda Mercer
-**Role:** Procurement Director  
-**Difficulty:** Medium
+Default Model:
 
-Focuses on:
-- Vendor Evaluation
-- Contracts
-- Procurement
-- Risk Management
+- openai/gpt-oss-120b
+
+Development History
+
+- Planned development with Claude Code
+- Built using OpenAI Codex
+- Initial AI backend: Google Gemini
+- Migrated to Groq after Gemini free-tier quota exhaustion
+
+The backend supports any OpenAI-compatible provider through environment variables.
 
 ---
 
-## 📊 AI Coaching
-
-After every conversation the AI evaluates:
-
-- Discovery Questions
-- Value Proposition
-- Rapport
-- Objection Handling
-- Communication
-- Closing Technique
-
----
-
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```
-Sales-Crucible
+Sales-Crucible/
 │
-├── frontend
-│   ├── src
-│   ├── public
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── hooks/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   ├── public/
 │   ├── package.json
 │   └── vite.config.js
 │
-├── backend
-│   ├── routes
-│   ├── controllers
-│   ├── prompts
-│   ├── services
+├── backend/
+│   ├── routes/
+│   ├── controllers/
+│   ├── utils/
 │   ├── server.js
 │   ├── package.json
+│   ├── .env.example
 │   └── .env
 │
 ├── README.md
@@ -188,43 +199,188 @@ Sales-Crucible
 
 ---
 
-## ⚙️ Installation
+# 🎤 Voice Features
 
-### Clone Repository
+## Speech Recognition
+
+The application uses the browser's built-in **Web Speech API**.
+
+```
+SpeechRecognition
+webkitSpeechRecognition
+```
+
+Speech is automatically converted into text before being sent to the backend.
+
+### Benefits
+
+- No paid speech service
+- No WebRTC
+- Browser-native
+- Fast speech recognition
+
+---
+
+## Speech Synthesis
+
+The AI customer's responses are spoken aloud using
+
+```
+window.speechSynthesis
+```
+
+Benefits
+
+- Browser-supported
+- No external Text-to-Speech API
+- Natural AI responses
+
+---
+
+# 💬 How the Roleplay Works
+
+1. Select a buyer persona.
+2. Start speaking or type your pitch.
+3. The backend sends your message and buyer settings to the AI.
+4. The AI generates realistic customer responses.
+5. Continue the conversation naturally.
+6. Finish the session.
+7. Click **Analyze Pitch & Grade**.
+8. Receive an AI-generated coaching report.
+
+---
+
+# 👥 Buyer Personas
+
+The application includes multiple configurable buyer personas.
+
+## Arthur Pendelton
+
+**Role:** CFO
+
+Difficulty: Hard
+
+Focus Areas
+
+- Budget
+- ROI
+- Financial Risk
+- Software Costs
+
+---
+
+## David Chen
+
+**Role:** CTO
+
+Difficulty: Hard
+
+Focus Areas
+
+- Security
+- APIs
+- Infrastructure
+- Integrations
+
+---
+
+## Sarah Jenkins
+
+**Role:** VP Marketing
+
+Difficulty: Easy
+
+Focus Areas
+
+- Marketing Campaigns
+- Team Productivity
+- Growth
+- ROI
+
+---
+
+## Linda Mercer
+
+**Role:** Procurement Director
+
+Difficulty: Medium
+
+Focus Areas
+
+- Vendor Selection
+- Contracts
+- Procurement Process
+- Risk Reduction
+
+---
+
+# 📊 Coaching Report
+
+After every conversation the AI evaluates:
+
+- Discovery Questions
+- Rapport Building
+- Value Proposition
+- Objection Handling
+- Product Knowledge
+- Closing Strategy
+- Overall Communication
+
+The report includes actionable suggestions for improvement.
+
+---
+
+# ⚙ Installation
+
+## Prerequisites
+
+Node.js 18+
+
+---
+
+## Clone Repository
 
 ```bash
 git clone https://github.com/yourusername/Sales-Crucible.git
 ```
 
-### Backend
+---
+
+## Install Backend
 
 ```bash
 cd backend
 
 npm install
-
-npm run dev
 ```
 
-Create a `.env` file
+Create `.env`
 
 ```env
-GROQ_API_KEY=your_api_key
+GROQ_API_KEY=your_groq_api_key
 
 PORT=5000
 ```
 
-### Frontend
+Run backend
 
 ```bash
-cd frontend
+npm run dev
+```
+
+---
+
+## Install Frontend
+
+```bash
+cd ../frontend
 
 npm install
 
 npm run dev
 ```
 
-Visit
+Open
 
 ```
 http://localhost:5173
@@ -232,84 +388,160 @@ http://localhost:5173
 
 ---
 
-## 🔄 Switching AI Providers
+# 🌐 Environment Variables
+
+```
+GROQ_API_KEY=your_api_key
+
+PORT=5000
+
+LLM_API_KEY=
+
+LLM_BASE_URL=
+
+LLM_MODEL=openai/gpt-oss-120b
+```
+
+---
+
+# 🔄 Switching AI Providers
 
 The backend supports any OpenAI-compatible provider.
 
-```env
+Example
+
+```
 LLM_API_KEY=your_provider_key
 
 LLM_BASE_URL=https://provider.example/v1
 
-LLM_MODEL=provider_model_name
+LLM_MODEL=provider_model
 ```
 
-Examples:
+Supported providers include
 
 - Groq
 - OpenAI
 - OpenRouter
+- Local OpenAI-compatible servers
 
 ---
 
-## 📈 Learning Outcomes
+# 📈 Learning Outcomes
 
-This project helped strengthen my understanding of:
+This project helped strengthen skills in
 
 - React
 - Node.js
-- Express
+- Express.js
 - REST APIs
-- AI Integration
 - Prompt Engineering
+- AI Integration
 - Browser Voice APIs
+- Speech Recognition
+- Speech Synthesis
+- Full-stack Application Development
+- API Provider Migration
 - State Management
-- Full-Stack Development
+- Environment Configuration
 
 ---
 
-## 🔮 Future Improvements
+# ⚡ Challenges Faced
+
+Some of the key challenges during development included:
+
+- Managing conversation history
+- Designing configurable AI personas
+- Handling asynchronous API requests
+- Integrating browser speech APIs
+- Migrating from Gemini to Groq
+- Maintaining provider-independent backend architecture
+- Managing AI prompts effectively
+
+---
+
+# 🧪 Verification
+
+Run lint
+
+```bash
+npm run lint
+```
+
+Build project
+
+```bash
+npm run build
+```
+
+---
+
+# 📷 Screenshots
+
+```
+screenshots/
+
+home.png
+
+chat.png
+
+voice-mode.png
+
+analysis.png
+```
+
+(Add screenshots after uploading them.)
+
+---
+
+# 🔮 Future Improvements
 
 - Authentication
-- CRM Integration
-- Conversation History
-- Team Dashboard
-- PDF Reports
-- Multi-language Support
-- Additional Buyer Personas
-- Performance Analytics
+- Conversation history
+- Dashboard
+- CRM integration
+- Analytics
+- Multiple languages
+- Voice customization
+- Additional buyer personas
+- Team leaderboard
+- Export coaching reports
+- PDF report generation
 
 ---
 
-## 🤝 Contributing
+# 🤝 Contributing
 
 Contributions are welcome.
 
 1. Fork the repository.
-2. Create a new branch.
+2. Create a feature branch.
 3. Commit your changes.
 4. Push the branch.
 5. Open a Pull Request.
 
 ---
 
-## 🙏 Acknowledgements
+# 🙏 Acknowledgements
 
 This project was developed with assistance from **OpenAI Codex** for implementation, debugging, and code refinement.
 
-The project was originally planned for **Claude Code**, but due to its paid subscription requirement, development was completed using OpenAI Codex.
+The project was originally planned to be built using **Claude Code**, but due to its paid subscription requirement, development was completed using OpenAI Codex.
 
-The backend initially integrated **Google Gemini** before being migrated to **Groq** after the free-tier quota was exhausted.
+The AI backend initially used **Google Gemini** before being migrated to **Groq** after the free-tier quota limit was reached.
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Adrija Karmakar**
 
 Final Year B.Tech Computer Science Engineering Student
 
-**Skills**
+Full Stack Developer
+
+### Skills
 
 - React
 - Node.js
@@ -317,21 +549,19 @@ Final Year B.Tech Computer Science Engineering Student
 - JavaScript
 - MongoDB
 - REST APIs
+- Git
+- GitHub
 
-**GitHub**
+**GitHub:** https://github.com/Adrija78
 
-https://github.com/Adrija78
-
-**Portfolio**
-
-https://addyy-portfolio.vercel.app/
+**Portfolio:** https://addyy-portfolio.vercel.app/
 
 ---
 
-## 📄 License
+# 📄 License
 
 This project is licensed under the MIT License.
 
 ---
 
-⭐ If you found this project useful, consider giving it a **Star**.
+# ⭐ If you found this project useful, consider giving it a Star!
