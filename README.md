@@ -1,138 +1,337 @@
-# Sales Crucible — AI Sales Roleplay Voice Bot
+# 🎯 Sales Crucible – AI Sales Roleplay Voice Bot
 
-Sales Crucible is a voice-enabled sales-practice application. A sales representative speaks or types a pitch, while an AI roleplays as a realistic customer: it asks questions, challenges vague claims, and raises objections. When the session ends, the app can analyze the transcript and return a coaching scorecard.
+Sales Crucible is a full-stack AI-powered sales training application that helps users practice real-world sales conversations through text and voice interactions. The application simulates realistic customer personas that ask questions, challenge vague claims, raise objections, and provide a lifelike sales experience. After each roleplay session, the AI analyzes the conversation and generates a coaching scorecard with actionable feedback.
 
-## What it demonstrates
+---
 
-- Live spoken, turn-based roleplay using the browser microphone and text-to-speech.
-- Configurable buyer simulations, including industry, company size, difficulty, temperament, urgency, objection style, and custom context.
-- Four starter personas plus a custom-buyer editor. Personas are fictional, privacy-safe training profiles—not real customers.
-- A transcript and AI sales-coaching scorecard for objection handling, value proposition, rapport, and closing.
+## 🚀 Features
 
-## Architecture
+- 🤖 AI-powered customer roleplay
+- 🎤 Voice-enabled conversations
+- 💬 Text chat support
+- 🔊 AI voice responses
+- 👥 Multiple buyer personas
+- ⚙️ Custom buyer configuration
+- 📊 AI-generated coaching scorecard
+- 📝 Complete conversation transcript
+- 🎯 Objection handling practice
+- 📱 Responsive React interface
 
-`Microphone / text input → React UI → Express API → Groq chat completion → customer reply → browser speech synthesis`
+---
 
-The frontend uses React and Vite. The backend uses Node.js and Express. Persona settings are sent with each turn, transformed into a system prompt on the backend, and then supplied with conversation history to the model. This keeps customer behavior configuration-driven rather than creating separate hardcoded bots.
+## 🛠️ Tech Stack
 
-## AI provider decision
+### Frontend
 
-The first version used Google Gemini. During development its free-tier quota was exhausted, so the backend was switched to Groq without changing the frontend. Groq offers an OpenAI-compatible chat-completions endpoint; the project uses the `openai/gpt-oss-120b` model by default. The provider adapter also supports any OpenAI-compatible provider through environment variables.
+- React
+- Vite
+- JavaScript
+- HTML5
+- CSS3
 
-## Setup
+### Backend
 
-Prerequisite: Node.js 18 or newer.
+- Node.js
+- Express.js
 
-1. Create `backend/.env` from `backend/.env.example`.
-2. Add your Groq API key:
+### AI
+
+- Groq API
+- OpenAI-Compatible Chat Completion API
+- GPT OSS 120B
+
+### Browser APIs
+
+- SpeechRecognition
+- SpeechSynthesis
+- Web Speech API
+
+### Development Tools
+
+- Visual Studio Code
+- Git
+- GitHub
+- OpenAI Codex
+
+---
+
+## 🏗️ Architecture
+
+```
+Microphone / Text Input
+        │
+        ▼
+   React Frontend
+        │
+        ▼
+   Express Backend
+        │
+        ▼
+     Groq API
+        │
+        ▼
+ AI Customer Response
+        │
+        ▼
+Browser Speech Synthesis
+```
+
+---
+
+## 🧠 Development Journey
+
+This project was originally planned to be developed using **Claude Code** because of its agent-based coding workflow. However, Claude Code requires a paid subscription, which was unavailable during development.
+
+Instead, the project was built with assistance from **OpenAI Codex**, which was used for implementation, debugging, refactoring, and backend integration.
+
+The backend initially used **Google Gemini**, but after reaching the free-tier API quota, it was migrated to **Groq**. Since Groq provides an OpenAI-compatible Chat Completion API, the migration only required backend configuration changes while keeping the frontend unchanged.
+
+---
+
+## ⚡ How It Works
+
+1. Select a buyer persona.
+2. Start speaking or type your sales pitch.
+3. Your message is sent to the backend.
+4. The backend sends the conversation history and persona to the AI model.
+5. The AI responds as a realistic customer.
+6. The response is displayed and spoken aloud.
+7. End the session and analyze your performance.
+
+---
+
+## 👥 Buyer Personas
+
+### Arthur Pendelton
+**Role:** CFO  
+**Difficulty:** Hard
+
+Focuses on:
+- ROI
+- Budget
+- Cost Reduction
+- Financial Risk
+
+---
+
+### David Chen
+**Role:** CTO  
+**Difficulty:** Hard
+
+Focuses on:
+- Security
+- APIs
+- Integrations
+- Scalability
+
+---
+
+### Sarah Jenkins
+**Role:** VP Marketing  
+**Difficulty:** Easy
+
+Focuses on:
+- Marketing Campaigns
+- Team Productivity
+- Growth
+
+---
+
+### Linda Mercer
+**Role:** Procurement Director  
+**Difficulty:** Medium
+
+Focuses on:
+- Vendor Evaluation
+- Contracts
+- Procurement
+- Risk Management
+
+---
+
+## 📊 AI Coaching
+
+After every conversation the AI evaluates:
+
+- Discovery Questions
+- Value Proposition
+- Rapport
+- Objection Handling
+- Communication
+- Closing Technique
+
+---
+
+## 📂 Project Structure
+
+```
+Sales-Crucible
+│
+├── frontend
+│   ├── src
+│   ├── public
+│   ├── package.json
+│   └── vite.config.js
+│
+├── backend
+│   ├── routes
+│   ├── controllers
+│   ├── prompts
+│   ├── services
+│   ├── server.js
+│   ├── package.json
+│   └── .env
+│
+├── README.md
+└── .gitignore
+```
+
+---
+
+## ⚙️ Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/yourusername/Sales-Crucible.git
+```
+
+### Backend
+
+```bash
+cd backend
+
+npm install
+
+npm run dev
+```
+
+Create a `.env` file
 
 ```env
-GROQ_API_KEY=your_groq_api_key
+GROQ_API_KEY=your_api_key
+
 PORT=5000
 ```
 
-3. Run the backend in one terminal:
+### Frontend
 
-```powershell
-cd backend
-npm.cmd install
-npm.cmd run dev
+```bash
+cd frontend
+
+npm install
+
+npm run dev
 ```
 
-4. Run the frontend in a second terminal:
+Visit
 
-```powershell
-cd ..
-npm.cmd install
-npm.cmd run dev
+```
+http://localhost:5173
 ```
 
-Open the Vite URL printed in the terminal, normally `http://localhost:5173`.
+---
 
-## Using the roleplay
+## 🔄 Switching AI Providers
 
-1. Select a buyer preset or configure a custom buyer.
-2. State your name, company, and the value you offer. Use the microphone or type your message.
-3. Ask discovery questions, respond to the buyer’s objections, and request a clear next step such as a demo.
-4. Select **Analyze Pitch & Grade** for coaching feedback.
-
-You are always the sales representative. The AI is always the customer/prospect.
-
-## Buyer playbooks
-
-Use these discovery questions when practising. Ask only one at a time, then follow the customer’s answer.
-
-### Arthur Pendelton — CFO, hard difficulty
-
-- How do you currently track software spend and unused licenses?
-- Which renewals or cost areas are under the most scrutiny this quarter?
-- What financial outcome would make a new solution worth evaluating?
-- What evidence would you need to believe savings can be achieved within three months?
-- If the ROI is proven, who else is involved in approving a pilot?
-
-### David Chen — CTO, hard difficulty
-
-- Which systems would a new tool need to integrate with on day one?
-- What security, SSO, data-residency, or compliance requirements are non-negotiable?
-- How does your team evaluate vendor reliability and API performance today?
-- What would make implementation too disruptive for your engineering team?
-- Who needs to validate the technical solution before a pilot can begin?
-
-### Sarah Jenkins — VP Marketing, easy difficulty
-
-- What campaign or growth goal is most urgent for your team right now?
-- Where does your team lose the most time in the current workflow?
-- How quickly would your team need to see value after onboarding?
-- What would make adoption easy for your creative and marketing teams?
-- Would a short demo with the campaign team be a useful next step?
-
-### Linda Mercer — Procurement Director, medium difficulty
-
-- What is your normal process for evaluating and onboarding a new vendor?
-- What contract terms or risks usually slow down a purchase?
-- Would a time-boxed pilot reduce the risk enough to evaluate us?
-- Which proof points or customer references would procurement require?
-- Who should be included in a first evaluation meeting?
-
-## Switching providers
-
-Set these values in `backend/.env` to use OpenAI, OpenRouter, or another compatible API:
+The backend supports any OpenAI-compatible provider.
 
 ```env
 LLM_API_KEY=your_provider_key
+
 LLM_BASE_URL=https://provider.example/v1
+
 LLM_MODEL=provider_model_name
 ```
 
-Never commit `backend/.env`. It is ignored by Git.
+Examples:
 
-## Deployment
+- Groq
+- OpenAI
+- OpenRouter
 
-Deploy the backend first, then deploy the frontend.
+---
 
-### 1. Backend on Render
+## 📈 Learning Outcomes
 
-1. In Render, select **New → Blueprint** and connect this GitHub repository. Render will use `render.yaml` and create the Express service from the `backend` directory.
-2. Add the secret environment variable `GROQ_API_KEY` in the Render service settings. Do not put it in GitHub.
-3. Deploy and copy the service URL, for example `https://sales-roleplay-api.onrender.com`.
+This project helped strengthen my understanding of:
 
-### 2. Frontend on Vercel
+- React
+- Node.js
+- Express
+- REST APIs
+- AI Integration
+- Prompt Engineering
+- Browser Voice APIs
+- State Management
+- Full-Stack Development
 
-1. Import this GitHub repository in Vercel.
-2. Keep the project root as the repository root; Vercel detects Vite automatically.
-3. Add this environment variable before deploying:
+---
 
-```env
-VITE_API_BASE_URL=https://your-render-service.onrender.com/api/chat
-```
+## 🔮 Future Improvements
 
-4. Deploy. Vite exposes only variables prefixed with `VITE_`, so the frontend receives the public backend URL but never the Groq key.
+- Authentication
+- CRM Integration
+- Conversation History
+- Team Dashboard
+- PDF Reports
+- Multi-language Support
+- Additional Buyer Personas
+- Performance Analytics
 
-After deployment, open the Vercel URL and allow microphone permission. The frontend sends requests to Render, and only the Render backend can call Groq.
+---
 
-## Verification
+## 🤝 Contributing
 
-```powershell
-npm.cmd run lint
-npm.cmd run build
-```
+Contributions are welcome.
+
+1. Fork the repository.
+2. Create a new branch.
+3. Commit your changes.
+4. Push the branch.
+5. Open a Pull Request.
+
+---
+
+## 🙏 Acknowledgements
+
+This project was developed with assistance from **OpenAI Codex** for implementation, debugging, and code refinement.
+
+The project was originally planned for **Claude Code**, but due to its paid subscription requirement, development was completed using OpenAI Codex.
+
+The backend initially integrated **Google Gemini** before being migrated to **Groq** after the free-tier quota was exhausted.
+
+---
+
+## 👨‍💻 Author
+
+**Adrija Karmakar**
+
+Final Year B.Tech Computer Science Engineering Student
+
+**Skills**
+
+- React
+- Node.js
+- Express.js
+- JavaScript
+- MongoDB
+- REST APIs
+
+**GitHub**
+
+https://github.com/Adrija78
+
+**Portfolio**
+
+https://addyy-portfolio.vercel.app/
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+⭐ If you found this project useful, consider giving it a **Star**.
